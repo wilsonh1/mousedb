@@ -1,0 +1,65 @@
+<html>
+<body>
+    <form method="POST" action="/">
+        <input type="text" name="id">
+        <input type="submit" value="Add strain">
+    </form>
+    {% for strain in strains %}
+        <table>
+            <tr>
+                <td>
+                    <h1>{{strain.id}}</h1>
+                </td>
+                <td>
+                    <form method="POST" action="./delete" style="display: inline">
+                        <input type="hidden" value="strain" name="table">
+                        <input type="hidden" value="{{strain.id}}" name="id">
+                        <input type="submit" value="Delete">
+                    </form>
+                </td>
+            </tr>
+        </table>
+        <form method="POST" action="/">
+            <input type="text" name="id">
+            <input type="text" name="count">
+            <select name="sex">
+                <option value="M">M</option>
+                <option value="F">F</option>
+            </select>
+            <input type="date" name="dob">
+            <input type="hidden" value="{{strain.id}}" name="strain">
+            <input type="submit" value="Add mouse">
+        </form>
+        <table>
+            {% for mouse in strain.mice %}
+            <tr>
+                <td>
+                    <form method="POST" action="./update" style="display: inline">
+                        <input type="hidden" value="{{mouse.id}}" name="oldid">
+                        <input type="hidden" value="{{mouse.count}}" name="oldcount">
+                        <input type="hidden" value="{{mouse.sex}}" name="oldsex">
+                        <input type="hidden" value="{{mouse.dob}}" name="olddob">
+                        <input type="text" value="{{mouse.id}}" name="newid">
+                        <input type="text" value="{{mouse.count}}" name="newcount">
+                        <select name="newsex">
+                            <option value="" selected disabled hidden>{{mouse.sex}}</option>
+                            <option value="M">M</option>
+                            <option value="F">F</option>
+                        </select>
+                        <input value="{{mouse.dob}}" type="date" name="newdob">
+                        <input type="submit" value="Update">
+                    </form>
+                </td>
+                <td>
+                    <form method="POST" action="./delete" style="display: inline">
+                        <input type="hidden" value="mouse" name="table">
+                        <input type="hidden" value="{{mouse.id}}" name="id">
+                        <input type="submit" value="Delete">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endfor %}
+</body>
+</html>
