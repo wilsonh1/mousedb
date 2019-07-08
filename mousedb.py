@@ -29,6 +29,7 @@ class Mice(db.Model):
     count = db.Column(db.Integer)
     sex = db.Column(db.String(1))
     dob = db.Column(db.Date)
+    notes = db.Column(db.String(200))
     sid = db.Column(db.String(20), db.ForeignKey('strains.id'))
 
     strains = db.relationship("Strains", back_populates="mice")
@@ -38,7 +39,7 @@ def home():
     if request.form:
         try:
             if request.form.get("strain"):
-                mouse = Mice(id=request.form.get("id"), count=int(request.form.get("count")), sex=request.form.get("sex"), dob=datetime.strptime(request.form.get("dob"), '%Y-%m-%d'))
+                mouse = Mice(id=request.form.get("id"), count=int(request.form.get("count")), sex=request.form.get("sex"), dob=datetime.strptime(request.form.get("dob"), '%Y-%m-%d'), notes=request.form.get("notes"))
                 strain = Strains.query.filter_by(id=request.form.get("strain")).first()
                 strain.mice.append(mouse)
                 db.session.add(mouse)

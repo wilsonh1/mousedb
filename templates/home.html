@@ -27,6 +27,7 @@
                 <option value="F">F</option>
             </select>
             <input type="date" name="dob">
+            <input type="text" name="notes">
             <input type="hidden" value="{{strain.id}}" name="strain">
             <input type="submit" value="Add mouse">
         </form>
@@ -47,6 +48,7 @@
                             <option value="F">F</option>
                         </select>
                         <input value="{{mouse.dob}}" type="date" name="newdob">
+                        <input value="{{mouse.notes}}" type="text" name="notes">
                         <input type="submit" value="Update">
                     </form>
                 </td>
