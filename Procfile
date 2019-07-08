@@ -1,1 +1,1 @@
-web: python3 mousedb.py
+web: gunicorn mousedb:app
